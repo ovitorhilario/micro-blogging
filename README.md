@@ -2,8 +2,9 @@
 Desenvolvido em Node.js com MongoDB para a disciplina de Programação Web Back-End. <br/>
 **Aluno**: Vitor Barbosa Hilário
 
-<img width="1503" height="912" alt="image" src="https://github.com/user-attachments/assets/bf737f0f-1e58-4002-8934-8ab73d9a5424" />
-
+| Feed | Perfil |
+|------|------|
+| <img width="500" alt="image 1" src="https://github.com/user-attachments/assets/d1cc5a88-3754-4481-9f9d-e40b4ff6ce43" /> | <img width="500" alt="image 2" src="https://github.com/user-attachments/assets/39432496-78bb-491a-9d05-0dce1c7495ac" /> |
 
 ## Pré-requisitos
 
