@@ -27,8 +27,12 @@ npm install
    - Crie um arquivo `.env` na raiz do projeto
    - Adicione as seguintes variáveis:
 ```env
-MONGODB_URI=mongodb://localhost:27017/microblogging
+# Configurações do Banco de Dados
+MONGODB_URI=mongodb://localhost:27017
+DB_NAME=blog
 SESSION_SECRET=sua-chave-secreta-aqui
+
+# Configurações do Servidor
 PORT=3000
 ```
 
