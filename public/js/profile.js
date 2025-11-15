@@ -77,6 +77,10 @@ async function loadUserPosts() {
         data.data.posts.forEach(post => {
             const postDiv = document.createElement('div');
             postDiv.className = 'post';
+            
+            // Verificar se o usuário atual curtiu este post
+            const isLiked = post.likes && post.likes.some(like => like.toString() === currentUser._id);
+            
             postDiv.innerHTML = `
                 <div class="post-header">
                     <div class="post-author-info">
@@ -92,12 +96,22 @@ async function loadUserPosts() {
                     ${processHashtags(post.content || '')}
                 </div>
                 <div class="post-actions">
-                    <span class="post-action">
+                    <span class="post-action ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post._id}')">
                         ❤️ ${post.likes ? post.likes.length : 0}
                     </span>
-                    <span class="post-action">
-                        💬 Comentários
+                    <span class="post-action" onclick="toggleComments('${post._id}')">
+                        💬 ${post.commentsCount || 0}
                     </span>
+                    ${profileUsername === currentUser.username ? `<span class="post-action delete-action" onclick="deletePost('${post._id}')">🗑️ Deletar</span>` : ''}
+                </div>
+                <div id="comments-${post._id}" class="comments-section" style="display: none;">
+                    <div class="comments-list" id="comments-list-${post._id}">
+                        <p class="text-center loading">Carregando comentários...</p>
+                    </div>
+                    <form class="comment-form" onsubmit="submitComment(event, '${post._id}')">
+                        <textarea placeholder="Escreva um comentário..." maxlength="280" required></textarea>
+                        <button type="submit" class="btn btn-primary btn-small">Comentar</button>
+                    </form>
                 </div>
             `;
             userPostsContainer.appendChild(postDiv);
@@ -106,6 +120,107 @@ async function loadUserPosts() {
         userPostsContainer.innerHTML = `
             <p class="error-message show">Erro ao carregar posts: ${error.message}</p>
         `;
+    }
+}
+
+// Toggle like
+async function toggleLike(postId) {
+    try {
+        // Encontrar o botão de like para este post
+        const likeButton = document.querySelector(`[onclick="toggleLike('${postId}')"]`);
+        const isLiked = likeButton.classList.contains('liked');
+        
+        if (isLiked) {
+            // Descurtir
+            await apiDelete(`/posts/${postId}/like`);
+        } else {
+            // Curtir
+            await apiPost(`/posts/${postId}/like`);
+        }
+        
+        loadProfile();
+    } catch (error) {
+        console.error('Erro ao curtir:', error);
+    }
+}
+
+// Toggle seção de comentários
+async function toggleComments(postId) {
+    const commentsSection = document.getElementById(`comments-${postId}`);
+    
+    if (commentsSection.style.display === 'none') {
+        commentsSection.style.display = 'block';
+        // Carregar comentários
+        await loadComments(postId);
+    } else {
+        commentsSection.style.display = 'none';
+    }
+}
+
+// Carregar comentários de um post
+async function loadComments(postId) {
+    const commentsList = document.getElementById(`comments-list-${postId}`);
+    
+    try {
+        const data = await apiGet(`/comments/post/${postId}`);
+        const comments = data.data.comments;
+        
+        if (comments.length === 0) {
+            commentsList.innerHTML = '<p class="text-center">Seja o primeiro a comentar!</p>';
+            return;
+        }
+        
+        commentsList.innerHTML = '';
+        comments.forEach(comment => {
+            commentsList.appendChild(renderComment(comment));
+        });
+    } catch (error) {
+        commentsList.innerHTML = '<p class="error-message show">Erro ao carregar comentários</p>';
+    }
+}
+
+// Renderizar comentário
+function renderComment(comment) {
+    const commentDiv = document.createElement('div');
+    commentDiv.className = 'comment';
+    commentDiv.innerHTML = `
+        <div class="comment-header">
+            <div class="comment-author-info">
+                <img src="${comment.profileImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + comment.username}" 
+                     alt="Avatar de @${comment.username}" 
+                     class="comment-avatar" 
+                     onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=default'">
+                <a href="/profile.html?username=${comment.username}" class="comment-author">@${comment.username}</a>
+            </div>
+            <span class="comment-date">${formatDate(comment.createdAt)}</span>
+        </div>
+        <div class="comment-content">
+            ${processHashtags(comment.content || '')}
+        </div>
+    `;
+    return commentDiv;
+}
+
+// Submeter comentário
+async function submitComment(event, postId) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const textarea = form.querySelector('textarea');
+    const content = textarea.value.trim();
+    
+    if (!content) {
+        return;
+    }
+    
+    try {
+        await apiPost('/comments', { postId, content });
+        textarea.value = '';
+        await loadComments(postId);
+        // Atualizar contador de comentários
+        loadProfile();
+    } catch (error) {
+        console.error('Erro ao comentar:', error);
     }
 }
 
@@ -127,8 +242,18 @@ async function toggleFollow() {
     }
 }
 
-// Tornar função global
-window.toggleFollow = toggleFollow;
+// Deletar post próprio
+async function deletePost(postId) {
+    if (!confirm('Tem certeza que deseja deletar este post?')) {
+        return;
+    }
+    
+    try {
+        await apiDelete(`/posts/${postId}`);
+        loadProfile();
+    } catch (error) {
+        console.error('Erro ao deletar post:', error);
+    }
+}
 
-// Carregar perfil ao iniciar
 loadProfile();

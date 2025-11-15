@@ -40,9 +40,3 @@ function hideError(elementId) {
         element.classList.remove('show');
     }
 }
-
-// Tornar funções globais
-window.formatDate = formatDate;
-window.processHashtags = processHashtags;
-window.showError = showError;
-window.hideError = hideError;

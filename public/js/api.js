@@ -55,9 +55,3 @@ async function apiPut(endpoint, body) {
 async function apiDelete(endpoint) {
     return apiRequest(endpoint, { method: 'DELETE' });
 }
-
-// Tornar funções globais
-window.apiGet = apiGet;
-window.apiPost = apiPost;
-window.apiPut = apiPut;
-window.apiDelete = apiDelete;

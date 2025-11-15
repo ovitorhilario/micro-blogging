@@ -159,7 +159,7 @@ function renderPosts(posts) {
     if (posts.length === 0) {
         let emptyMessage = '';
         if (currentFilter === 'timeline') {
-            emptyMessage = 'Nenhum post na timeline. Comece seguindo outros usuários para ver posts aqui!';
+            emptyMessage = 'Nenhum post na timeline. Que tal criar o primeiro?';
         } else if (currentFilter === 'myPosts') {
             emptyMessage = 'Você ainda não publicou nenhum post. Que tal criar o primeiro?';
         } else {
@@ -261,12 +261,6 @@ async function deletePost(postId) {
         console.error('Erro ao deletar post:', error);
     }
 }
-
-// Tornar funções globais
-window.toggleLike = toggleLike;
-window.deletePost = deletePost;
-window.toggleComments = toggleComments;
-window.submitComment = submitComment;
 
 // Toggle seção de comentários
 async function toggleComments(postId) {
@@ -403,9 +397,6 @@ async function deleteComment(commentId, postId) {
         alert('Erro ao deletar comentário: ' + error.message);
     }
 }
-
-window.toggleCommentLike = toggleCommentLike;
-window.deleteComment = deleteComment;
 
 // Função auxiliar para escapar HTML
 function escapeHtml(text) {
