@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Micro Blogging</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1>
+                <a href="/feed.html" style="color:white; text-decoration:none;">Micro Blogging</a>
+            </h1>
+            <div class="nav-links">
+                <a href="/feed.html">Feed</a>
+                <a href="#" class="active">Perfil</a>
+                <button id="logoutBtn" class="btn btn-secondary">Sair</button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- Informações do Perfil -->
+            <div class="card">
+                <div id="profileInfo">
+                    <p class="text-center loading">Carregando perfil...</p>
+                </div>
+            </div>
+            
+            <!-- Posts do Usuário -->
+            <div class="card">
+                <h2>Posts</h2>
+                <div id="userPostsContainer">
+                    <p class="text-center loading">Carregando posts...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

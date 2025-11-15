@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - Micro Blogging</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1>
+                <a href="/feed.html" style="color:white">Micro Blogging</a>
+            </h1>
+            <div class="nav-links">
+                <a href="/feed.html" class="active">Feed</a>
+                <a href="#" id="profileLink">Perfil</a>
+                <button id="logoutBtn" class="btn btn-secondary">Sair</button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="main-content">
+            <!-- Novo Post -->
+            <div class="card">
+                <h2>O que está pensando?</h2>
+                <form id="newPostForm">
+                    <div class="form-group">
+                        <textarea id="postContent" placeholder="Escreva algo... Use #hashtags" 
+                                  maxlength="280" required></textarea>
+                        <small id="charCount">0/280</small>
+                    </div>
+                    <div id="postErrorMessage" class="error-message"></div>
+                    <button type="submit" class="btn btn-primary">Publicar</button>
+                </form>
+            </div>
+            
+            <!-- Filtros do Feed -->
+            <div class="card">
+                <div class="feed-filters">
+                    <button id="timelineBtn" class="btn btn-secondary active">Timeline</button>
+                    <button id="myPostsBtn" class="btn btn-secondary">Meus Posts <span id="myPostsCount" class="badge">0</span></button>
+                    <button id="allBtn" class="btn btn-secondary">Tudo</button>
+                </div>
+            </div>
+            
+            <!-- Timeline -->
+            <div class="card">
+                <h2 id="feedTitle">Timeline</h2>
+                <div id="postsContainer">
+                    <p class="text-center loading">Carregando posts...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/feed.js"></script>
+</body>
+</html>

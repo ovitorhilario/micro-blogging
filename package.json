@@ -1,0 +1,24 @@
+{
+  "name": "micro-blogging",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "keywords": [
+    "micro-blogging",
+    "web",
+    "back-end",
+    "express"
+  ],
+  "author": "Vitor B. Hilário",
+  "license": "ISC",
+  "description": "Micro-blogging API with Express.js and Session authentication",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.1",
+    "mongodb": "^6.20.0"
+  }
+}
