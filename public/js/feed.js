@@ -192,7 +192,13 @@ function renderPost(post) {
     
     postDiv.innerHTML = `
         <div class="post-header">
-            <a href="/profile.html?username=${post.username}" class="post-author ${isOwnPost ? 'own-post' : ''}">@${post.username || 'usuário'}</a>
+            <div class="post-author-info">
+                <img src="${post.profileImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + post.username}" 
+                     alt="Avatar de @${post.username}" 
+                     class="post-avatar" 
+                     onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=default'">
+                <a href="/profile.html?username=${post.username}" class="post-author ${isOwnPost ? 'own-post' : ''}">@${post.username || 'usuário'}</a>
+            </div>
             <span class="post-date">${formatDate(post.createdAt)}</span>
         </div>
         <div class="post-content">

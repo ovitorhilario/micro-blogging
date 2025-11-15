@@ -186,6 +186,25 @@ body {
     margin-bottom: 10px;
 }
 
+.post-author-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e1e8ed;
+    transition: border-color 0.3s;
+}
+
+.post-author-info:hover .post-avatar {
+    border-color: #1da1f2;
+}
+
 .post-author {
     font-weight: 600;
     color: #14171a;
@@ -242,6 +261,22 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: start;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1da1f2;
+    margin-bottom: 15px;
 }
 
 .profile-info h2 {

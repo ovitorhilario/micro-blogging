@@ -30,6 +30,10 @@ async function loadProfile() {
         profileInfo.innerHTML = `
             <div class="profile-header">
                 <div class="profile-info">
+                    <img src="${user.profileImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + user.username}" 
+                         alt="Avatar de @${user.username}" 
+                         class="profile-avatar" 
+                         onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=default'">
                     <h2>${user.username}</h2>
                     <p class="profile-username">@${user.username}</p>
                     <p class="profile-bio">${user.bio || 'Sem bio'}</p>
@@ -75,7 +79,13 @@ async function loadUserPosts() {
             postDiv.className = 'post';
             postDiv.innerHTML = `
                 <div class="post-header">
-                    <span class="post-author">@${profileUsername}</span>
+                    <div class="post-author-info">
+                        <img src="${post.profileImage || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + profileUsername}" 
+                             alt="Avatar de @${profileUsername}" 
+                             class="post-avatar" 
+                             onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=default'">
+                        <span class="post-author">@${profileUsername}</span>
+                    </div>
                     <span class="post-date">${formatDate(post.createdAt)}</span>
                 </div>
                 <div class="post-content">

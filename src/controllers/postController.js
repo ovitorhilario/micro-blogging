@@ -62,9 +62,16 @@ class PostController {
         skip: parseInt(skip)
       });
 
+      // Enriquecer posts com informações do usuário
+      const enrichedPosts = posts.map(post => ({
+        ...post,
+        username: user.username,
+        profileImage: user.profileImage || null
+      }));
+
       res.json({
         success: true,
-        data: { posts }
+        data: { posts: enrichedPosts }
       });
     } catch (error) {
       Logger.logError(error, 'POST');
@@ -96,7 +103,11 @@ class PostController {
         posts.map(async (post) => {
           try {
             const user = await userModel.findById(post.userId.toString());
-            return { ...post, username: user.username };
+            return { 
+              ...post, 
+              username: user.username,
+              profileImage: user.profileImage || null
+            };
           } catch {
             return { ...post, username: 'unknown' };
           }
