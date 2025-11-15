@@ -34,17 +34,36 @@ PORT=3000
 
 ## Executando o projeto
 
-### Desenvolvimento
+### 1. Criar dados fictícios (recomendado antes de iniciar o comando abaixo)
 ```bash
-npm run dev
+npm run seed
 ```
 
-### Produção
+### 2. Inicar api e web 
 ```bash
-npm start
+npm run start
 ```
 
 A aplicação estará disponível em `http://localhost:3000`
+
+
+## Populando o banco de dados
+
+Para desenvolvimento e testes, você pode popular o banco de dados com dados de exemplo:
+
+```bash
+npm run seed
+```
+
+Este comando irá:
+- Criar 5 usuários de exemplo
+- Gerar 10 posts sobre tecnologia
+- Adicionar comentários nos posts
+- Simular curtidas
+
+**Atenção**: Este comando limpa todos os dados existentes antes de criar os novos.
+
+Para mais detalhes sobre o script de seeding, consulte `SEED_README.md`.
 
 
 ## Arquitetura MVC

@@ -3,7 +3,7 @@ import Logger from '../utils/logger.js';
 /**
  * Middleware para tratamento de erros
  */
-export const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, req, res) => {
   Logger.logError(err, 'ERROR_HANDLER');
 
   // Erros conhecidos

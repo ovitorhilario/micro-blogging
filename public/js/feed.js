@@ -265,7 +265,6 @@ window.submitComment = submitComment;
 // Toggle seção de comentários
 async function toggleComments(postId) {
     const commentsSection = document.getElementById(`comments-${postId}`);
-    const commentsList = document.getElementById(`comments-list-${postId}`);
     
     if (commentsSection.style.display === 'none') {
         commentsSection.style.display = 'block';

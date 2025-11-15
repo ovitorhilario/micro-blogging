@@ -1,5 +1,3 @@
-// Página de Registro
-
 redirectIfAuthenticated();
 
 const registerForm = document.getElementById('registerForm');

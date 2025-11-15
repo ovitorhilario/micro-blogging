@@ -1,6 +1,5 @@
 import userModel from '../models/User.js';
 import Logger from '../utils/logger.js';
-import { ValidationError } from '../utils/errors.js';
 
 class AuthController {
   /**

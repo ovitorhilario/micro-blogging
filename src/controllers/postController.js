@@ -97,7 +97,7 @@ class PostController {
           try {
             const user = await userModel.findById(post.userId.toString());
             return { ...post, username: user.username };
-          } catch (error) {
+          } catch {
             return { ...post, username: 'unknown' };
           }
         })
