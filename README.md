@@ -36,37 +36,20 @@ PORT=3000
 
 ## Executando o projeto
 
-### 1. Criar dados fictícios (recomendado antes de iniciar o comando abaixo)
+## Passo 1: Populando o banco de dados
+
+Rodando esse comando o blog já irá conter alguns posts, usuários e comentários.
+
 ```bash
 npm run seed
 ```
 
-### 2. Inicar api e web 
+### Passo 2: Inicar API e Web 
 ```bash
 npm run start
 ```
 
 A aplicação estará disponível em `http://localhost:3000`
-
-
-## Populando o banco de dados
-
-Para desenvolvimento e testes, você pode popular o banco de dados com dados de exemplo:
-
-```bash
-npm run seed
-```
-
-Este comando irá:
-- Criar 5 usuários de exemplo
-- Gerar 10 posts sobre tecnologia
-- Adicionar comentários nos posts
-- Simular curtidas
-
-**Atenção**: Este comando limpa todos os dados existentes antes de criar os novos.
-
-Para mais detalhes sobre o script de seeding, consulte `SEED_README.md`.
-
 
 ## Arquitetura MVC
 
