@@ -22,9 +22,15 @@ const logoutBtn = document.getElementById('logoutBtn');
 const timelineBtn = document.getElementById('timelineBtn');
 const myPostsBtn = document.getElementById('myPostsBtn');
 const allBtn = document.getElementById('allBtn');
+const hashtagSearchCard = document.getElementById('hashtagSearchCard');
+const hashtagTitle = document.getElementById('hashtagTitle');
+const clearHashtagBtn = document.getElementById('clearHashtagBtn');
+const hashtagSearchForm = document.getElementById('hashtagSearchForm');
+const hashtagSearchInput = document.getElementById('hashtagSearchInput');
 
 // Estado atual do filtro
 let currentFilter = 'timeline';
+let currentHashtag = null;
 
 // Configurar link do perfil
 profileLink.href = `/profile.html?username=${userData.username}`;
@@ -79,9 +85,25 @@ timelineBtn.addEventListener('click', () => setFilter('timeline'));
 myPostsBtn.addEventListener('click', () => setFilter('myPosts'));
 allBtn.addEventListener('click', () => setFilter('all'));
 
+// Event listener para limpar filtro de hashtag
+clearHashtagBtn.addEventListener('click', clearHashtagFilter);
+
+// Event listener para busca de hashtag
+hashtagSearchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const hashtag = hashtagSearchInput.value.trim().replace('#', '');
+    if (hashtag) {
+        searchHashtag(hashtag);
+    }
+});
+
 // Definir filtro ativo
 function setFilter(filter) {
     currentFilter = filter;
+    currentHashtag = null;
+    
+    // Esconder card de busca de hashtag
+    hashtagSearchCard.style.display = 'none';
     
     // Atualizar botões ativos
     timelineBtn.classList.remove('active');
@@ -119,7 +141,10 @@ async function loadFeed() {
     try {
         let data;
         
-        if (currentFilter === 'timeline') {
+        if (currentHashtag) {
+            // Filtro por hashtag tem prioridade
+            data = await apiGet(`/posts/hashtag/${currentHashtag}`);
+        } else if (currentFilter === 'timeline') {
             data = await apiGet('/posts/timeline');
         } else if (currentFilter === 'myPosts') {
             data = await apiGet(`/posts/user/${userData.username}`);
@@ -158,7 +183,9 @@ function renderPosts(posts) {
     
     if (posts.length === 0) {
         let emptyMessage = '';
-        if (currentFilter === 'timeline') {
+        if (currentHashtag) {
+            emptyMessage = `Nenhum post encontrado com a hashtag #${currentHashtag}.`;
+        } else if (currentFilter === 'timeline') {
             emptyMessage = 'Nenhum post na timeline. Que tal criar o primeiro?';
         } else if (currentFilter === 'myPosts') {
             emptyMessage = 'Você ainda não publicou nenhum post. Que tal criar o primeiro?';
@@ -403,6 +430,33 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+// Buscar posts por hashtag
+function searchHashtag(hashtag) {
+    currentHashtag = hashtag;
+    currentFilter = null;
+    
+    // Desativar todos os botões de filtro
+    timelineBtn.classList.remove('active');
+    myPostsBtn.classList.remove('active');
+    allBtn.classList.remove('active');
+    
+    // Mostrar card de busca de hashtag
+    hashtagSearchCard.style.display = 'block';
+    hashtagTitle.textContent = `Posts com #${hashtag}`;
+    feedTitle.textContent = `Resultados para #${hashtag}`;
+    
+    // Carregar posts com essa hashtag
+    loadFeed();
+}
+
+// Limpar filtro de hashtag
+function clearHashtagFilter() {
+    currentHashtag = null;
+    hashtagSearchCard.style.display = 'none';
+    hashtagSearchInput.value = '';
+    setFilter('timeline');
 }
 
 // Carregar feed ao iniciar

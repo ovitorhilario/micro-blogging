@@ -141,9 +141,27 @@ class PostController {
         skip: parseInt(skip)
       });
 
+      // Enriquecer posts com informações do usuário
+      const userModel = (await import('../models/User.js')).default;
+      
+      const enrichedPosts = await Promise.all(
+        posts.map(async (post) => {
+          try {
+            const user = await userModel.findById(post.userId.toString());
+            return { 
+              ...post, 
+              username: user.username,
+              profileImage: user.profileImage || null
+            };
+          } catch {
+            return { ...post, username: 'unknown' };
+          }
+        })
+      );
+
       res.json({
         success: true,
-        data: { posts }
+        data: { posts: enrichedPosts }
       });
     } catch (error) {
       Logger.logError(error, 'POST');

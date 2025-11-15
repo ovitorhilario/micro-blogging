@@ -226,6 +226,17 @@ body {
     word-wrap: break-word;
 }
 
+.hashtag {
+    color: #1da1f2;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.hashtag:hover {
+    text-decoration: underline;
+}
+
 .post-hashtag {
     color: #1da1f2;
     text-decoration: none;
@@ -504,4 +515,55 @@ a:hover {
 .btn-small {
     padding: 8px 16px;
     font-size: 14px;
+}
+
+/* Hashtag Search */
+.hashtag-search-container {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e1e8ed;
+}
+
+.hashtag-search-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.hashtag-search-input-group input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.hashtag-search-input-group input:focus {
+    outline: none;
+    border-color: #1da1f2;
+}
+
+.hashtag-search-input-group button {
+    border-radius: 20px;
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+
+.hashtag-search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.hashtag-search-header h3 {
+    color: #1da1f2;
+    margin: 0;
+    font-size: 18px;
+    flex: 1;
+}
+
+#hashtagSearchCard {
+    background: linear-gradient(135deg, #e8f5fd 0%, #f0f9ff 100%);
+    border-left: 4px solid #1da1f2;
 }

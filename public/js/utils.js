@@ -20,7 +20,7 @@ function formatDate(dateString) {
 
 // Processar hashtags no texto
 function processHashtags(text) {
-    return text.replace(/#(\w+)/g, '<span class="hashtag">#$1</span>');
+    return text.replace(/#(\w+)/g, '<a href="#" class="hashtag" onclick="searchHashtag(\'$1\'); return false;">#$1</a>');
 }
 
 // Mostrar mensagem de erro

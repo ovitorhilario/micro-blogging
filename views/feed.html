@@ -43,6 +43,26 @@
                     <button id="myPostsBtn" class="btn btn-secondary">Meus Posts <span id="myPostsCount" class="badge">0</span></button>
                     <button id="allBtn" class="btn btn-secondary">Tudo</button>
                 </div>
+                <div class="hashtag-search-container">
+                    <form id="hashtagSearchForm">
+                        <div class="hashtag-search-input-group">
+                            <input 
+                                type="text" 
+                                id="hashtagSearchInput" 
+                                placeholder="Buscar por hashtag (ex: javascript)" 
+                                autocomplete="off">
+                            <button type="submit" class="btn btn-primary">🔍 Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Busca por Hashtag -->
+            <div class="card" id="hashtagSearchCard" style="display: none;">
+                <div class="hashtag-search-header">
+                    <h3 id="hashtagTitle"></h3>
+                    <button id="clearHashtagBtn" class="btn btn-secondary btn-small">Limpar filtro</button>
+                </div>
             </div>
             
             <!-- Timeline -->
