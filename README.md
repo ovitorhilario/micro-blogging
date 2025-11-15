@@ -1,7 +1,9 @@
 # Micro Blogging
-Desenvolvido em Node.js com MongoDB para a disciplina de Programação Web Back-End. 
-#
-Aluno: Vitor Barbosa Hilário
+Desenvolvido em Node.js com MongoDB para a disciplina de Programação Web Back-End. <br/>
+**Aluno**: Vitor Barbosa Hilário
+
+<img width="1503" height="912" alt="image" src="https://github.com/user-attachments/assets/bf737f0f-1e58-4002-8934-8ab73d9a5424" />
+
 
 ## Pré-requisitos
 
