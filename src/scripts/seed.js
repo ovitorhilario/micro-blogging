@@ -257,14 +257,6 @@ class DatabaseSeeder {
       await Post.like(like.postId, like.userId);
       Logger.logInfo(`Curtida adicionada ao post ${like.postId}`, 'SEEDER');
     }
-
-    // Curtir alguns comentários
-    const commentLikes = [
-      { commentId: 'comment_id_1', userId: this.users[0]._id.toString() }, // Substituir pelos IDs reais se necessário
-    ];
-
-    // Nota: Para simplificar, não estamos curtindo comentários específicos aqui
-    // pois seria necessário buscar os IDs dos comentários criados
   }
 }
 
